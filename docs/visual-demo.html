@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Agent MCP - Visual Demo</title>
+  <link rel="stylesheet" href="../extension/styles/overlay.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: #f9fafb;
+    }
+    
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .demo-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+    
+    .demo-header h1 {
+      margin: 0 0 12px 0;
+      font-size: 36px;
+    }
+    
+    .demo-header p {
+      margin: 0;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+    
+    .demo-content {
+      padding: 40px;
+    }
+    
+    .feature {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .feature:last-child {
+      border-bottom: none;
+    }
+    
+    .feature h2 {
+      color: #111827;
+      margin: 0 0 16px 0;
+      font-size: 24px;
+    }
+    
+    .feature p {
+      color: #6b7280;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
+    }
+    
+    .demo-page {
+      position: relative;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      min-height: 300px;
+    }
+    
+    .sample-content {
+      padding: 80px 40px 40px 40px;
+    }
+    
+    .sample-content h3 {
+      color: #111827;
+      margin: 0 0 16px 0;
+    }
+    
+    .sample-content p {
+      color: #6b7280;
+      line-height: 1.6;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: white;
+      color: #374151;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    button:hover {
+      background: #f3f4f6;
+      border-color: #9ca3af;
+    }
+    
+    button.primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+    }
+    
+    button.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+    }
+    
+    .labeled-elements {
+      position: relative;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .labeled-element {
+      position: relative;
+      padding: 10px 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: white;
+      outline: 2px solid #fbbf24;
+      outline-offset: 2px;
+    }
+    
+    .code-block {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+    
+    .highlight {
+      color: #fbbf24;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="demo-header">
+      <h1>🤖 Browser Agent MCP</h1>
+      <p>Visual Overlay System Demo</p>
+    </div>
+    
+    <div class="demo-content">
+      <div class="feature">
+        <h2>1. Agent Status Overlay</h2>
+        <p>When a tab is connected to the agent, a purple status bar appears at the top showing the agent is active and what action is being performed.</p>
+        
+        <div class="demo-page">
+          <!-- Agent overlay will appear here -->
+          <div id="browser-agent-overlay">
+            <div class="agent-status-bar">
+              <span class="agent-icon">🤖</span>
+              <span class="agent-status-text">Agent Active</span>
+              <button class="agent-close-btn" title="Disconnect Agent">×</button>
+            </div>
+            <div class="agent-action-display" style="display: block;">
+              Clicking: Submit button
+            </div>
+          </div>
+          
+          <div class="sample-content">
+            <h3>Sample Page Content</h3>
+            <p>This is a sample webpage that the agent is controlling. The purple bar at the top indicates the agent is active.</p>
+            <div class="button-group">
+              <button class="primary">Submit</button>
+              <button>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feature">
+        <h2>2. Agent Cursor</h2>
+        <p>A visual cursor (🎯) appears and moves to elements before the agent interacts with them, providing clear visual feedback.</p>
+        
+        <div class="demo-page">
+          <div class="sample-content">
+            <h3>Interactive Elements</h3>
+            <p>Watch the cursor move to elements before clicking them.</p>
+            <div class="button-group">
+              <button>Button A</button>
+              <button>Button B</button>
+              <button class="primary">Button C</button>
+            </div>
+            
+            <!-- Agent cursor positioned at button -->
+            <div id="browser-agent-cursor" style="display: block; left: 200px; top: 250px;">
+              🎯
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feature">
+        <h2>3. Vimium-Style Element Labels</h2>
+        <p>When enabled, all actionable elements get labeled with letters (a, b, c, etc.) making them easy to reference and interact with.</p>
+        
+        <div class="demo-page">
+          <div class="sample-content">
+            <h3>Labeled Elements</h3>
+            <p>Each interactive element has a yellow label for easy identification.</p>
+            <div class="labeled-elements">
+              <div class="labeled-element">
+                Sign In
+                <div class="agent-element-label" style="position: absolute; top: -10px; left: -10px;">a</div>
+              </div>
+              <div class="labeled-element">
+                Sign Up
+                <div class="agent-element-label" style="position: absolute; top: -10px; left: -10px;">b</div>
+              </div>
+              <div class="labeled-element">
+                Learn More
+                <div class="agent-element-label" style="position: absolute; top: -10px; left: -10px;">c</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feature">
+        <h2>4. Complete Visual Flow</h2>
+        <p>Here's what the agent sees and does during a typical interaction:</p>
+        
+        <div class="code-block">
+          <div><span class="highlight">→</span> Agent receives command: "Click the Submit button"</div>
+          <div><span class="highlight">→</span> Agent cursor (🎯) moves to Submit button</div>
+          <div><span class="highlight">→</span> Action display shows: "Clicking: Submit button"</div>
+          <div><span class="highlight">→</span> Click event is triggered</div>
+          <div><span class="highlight">→</span> Cursor pulses briefly</div>
+          <div><span class="highlight">→</span> Page snapshot is returned to MCP server</div>
+          <div><span class="highlight">✓</span> Action complete</div>
+        </div>
+      </div>
+      
+      <div class="feature">
+        <h2>5. Multi-Tab Orchestration</h2>
+        <p>The agent can manage multiple tabs simultaneously, showing connection status for each.</p>
+        
+        <div class="code-block">
+          <div><span class="highlight">Open tabs:</span></div>
+          <div>- Tab 123: GitHub <span class="highlight">[AGENT CONNECTED] [ACTIVE]</span></div>
+          <div>- Tab 124: Hacker News</div>
+          <div>- Tab 125: Google</div>
+          <br>
+          <div><span class="highlight">Commands:</span></div>
+          <div>• browser_create_tab   - Create new tab</div>
+          <div>• browser_switch_tab   - Switch to tab</div>
+          <div>• browser_close_tab    - Close tab</div>
+          <div>• browser_list_tabs    - List all tabs</div>
+        </div>
+      </div>
+      
+      <div class="feature">
+        <h2>6. Installation & Usage</h2>
+        <p>Get started in 3 simple steps:</p>
+        
+        <div class="code-block">
+          <div><span class="highlight">Step 1:</span> Build the project</div>
+          <div>$ npm install</div>
+          <div>$ npm run build</div>
+          <br>
+          <div><span class="highlight">Step 2:</span> Load Chrome extension</div>
+          <div>1. Open chrome://extensions/</div>
+          <div>2. Enable "Developer mode"</div>
+          <div>3. Click "Load unpacked"</div>
+          <div>4. Select the 'extension' folder</div>
+          <br>
+          <div><span class="highlight">Step 3:</span> Connect and use</div>
+          <div>1. Click extension icon</div>
+          <div>2. Click "Connect This Tab"</div>
+          <div>3. Start automating with your AI assistant!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
