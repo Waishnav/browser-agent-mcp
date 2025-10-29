@@ -9,6 +9,7 @@ import { createServerWithTools } from "@/server";
 import * as common from "@/tools/common";
 import * as custom from "@/tools/custom";
 import * as snapshot from "@/tools/snapshot";
+import * as tabs from "@/tools/tabs";
 import type { Tool } from "@/tools/tool";
 
 import packageJSON from "../package.json";
@@ -25,6 +26,14 @@ const commonTools: Tool[] = [common.pressKey, common.wait];
 
 const customTools: Tool[] = [custom.getConsoleLogs, custom.screenshot];
 
+const tabTools: Tool[] = [
+  tabs.createTab,
+  tabs.closeTab,
+  tabs.switchTab,
+  tabs.listTabs,
+  tabs.labelElements,
+];
+
 const snapshotTools: Tool[] = [
   common.navigate(true),
   common.goBack(true),
@@ -36,6 +45,7 @@ const snapshotTools: Tool[] = [
   snapshot.selectOption,
   ...commonTools,
   ...customTools,
+  ...tabTools,
 ];
 
 const resources: Resource[] = [];

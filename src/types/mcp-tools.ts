@@ -112,3 +112,43 @@ export const ScreenshotTool = z.object({
     fullPage: z.boolean().optional().describe("Whether to capture the full scrollable page"),
   }),
 });
+
+// Tab management tools
+export const CreateTabTool = z.object({
+  name: z.literal("browser_create_tab"),
+  description: z.literal("Create a new browser tab"),
+  arguments: z.object({
+    url: z.string().describe("URL to open in the new tab"),
+  }),
+});
+
+export const CloseTabTool = z.object({
+  name: z.literal("browser_close_tab"),
+  description: z.literal("Close a browser tab"),
+  arguments: z.object({
+    tabId: z.number().describe("ID of the tab to close"),
+  }),
+});
+
+export const SwitchTabTool = z.object({
+  name: z.literal("browser_switch_tab"),
+  description: z.literal("Switch to a different browser tab"),
+  arguments: z.object({
+    tabId: z.number().describe("ID of the tab to switch to"),
+  }),
+});
+
+export const ListTabsTool = z.object({
+  name: z.literal("browser_list_tabs"),
+  description: z.literal("List all open browser tabs"),
+  arguments: z.object({}),
+});
+
+export const LabelElementsTool = z.object({
+  name: z.literal("browser_label_elements"),
+  description: z.literal("Show Vimium-style labels on all actionable elements"),
+  arguments: z.object({
+    show: z.boolean().describe("Whether to show or hide element labels"),
+  }),
+});
+

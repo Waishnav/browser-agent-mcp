@@ -215,6 +215,26 @@ async function handleMCPCommand(command, payload) {
       
     case 'browser_screenshot':
       return await captureScreenshot();
+    
+    case 'browser_create_tab':
+      return await chrome.runtime.sendMessage({ type: 'CREATE_TAB', url: payload.url });
+      
+    case 'browser_close_tab':
+      return await chrome.runtime.sendMessage({ type: 'CLOSE_TAB', tabId: payload.tabId });
+      
+    case 'browser_switch_tab':
+      return await chrome.runtime.sendMessage({ type: 'SWITCH_TAB', tabId: payload.tabId });
+      
+    case 'browser_list_tabs':
+      return await chrome.runtime.sendMessage({ type: 'LIST_TABS' });
+      
+    case 'browser_label_elements':
+      if (payload.show) {
+        labelActionableElements();
+      } else {
+        clearElementLabels();
+      }
+      return { success: true };
       
     default:
       throw new Error(`Unknown command: ${command}`);

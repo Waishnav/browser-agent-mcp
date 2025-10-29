@@ -47,6 +47,15 @@ export type SocketMessageMap = {
   getTitle: undefined;
   browser_get_console_logs: Record<string, never>;
   browser_screenshot: Record<string, never>;
+  
+  // Tab management
+  browser_create_tab: { url: string };
+  browser_close_tab: { tabId: number };
+  browser_switch_tab: { tabId: number };
+  browser_list_tabs: Record<string, never>;
+  
+  // Visual aids
+  browser_label_elements: { show: boolean };
 };
 
 export type MessageType<T> = keyof T;
