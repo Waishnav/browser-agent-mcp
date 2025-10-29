@@ -35,7 +35,16 @@ Thank you for your interest in contributing! This document provides guidelines a
 
 5. **Start Development Server**
    ```bash
-   npm run watch  # Auto-rebuilds on changes
+   npm run build -- --watch  # Auto-rebuilds on changes
+   ```
+   
+   Or in a separate terminal:
+   ```bash
+   # Terminal 1: Watch for changes
+   npm run build -- --watch
+   
+   # Terminal 2: Run the server
+   node dist/index.js
    ```
 
 ## Project Structure
