@@ -43,6 +43,18 @@ export type SocketMessageMap = {
     payload: Record<string, never>;
     response: any[];
   };
+  browser_spawn_tab: { payload: { url: string }; response: { tabId: number } };
+  browser_switch_tab: { payload: { tabId: number }; response: void };
+  browser_list_tabs: {
+    payload: Record<string, never>;
+    response: Array<{ id: number; title: string; url: string }>;
+  };
+  browser_close_tab: { payload: { tabId: number }; response: void };
+  browser_show_keybindings: {
+    payload: Record<string, never>;
+    response: { bindings: string[] };
+  };
+  browser_hide_keybindings: { payload: Record<string, never>; response: void };
   getUrl: { payload: undefined; response: string };
   getTitle: { payload: undefined; response: string };
 };

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Agent MCP</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Browser Agent MCP</h1>
+      <div class="status">
+        <span class="status-indicator" id="connectionStatus"></span>
+        <span id="statusText">Disconnected</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="connection-section">
+        <h2>Connection</h2>
+        <div class="input-group">
+          <label for="serverUrl">MCP Server URL</label>
+          <input 
+            type="text" 
+            id="serverUrl" 
+            placeholder="ws://localhost:9001"
+            value="ws://localhost:9001"
+          />
+        </div>
+        <button id="connectBtn" class="btn btn-primary">Connect</button>
+      </section>
+
+      <section class="tabs-section">
+        <h2>Controlled Tabs</h2>
+        <div id="tabsList" class="tabs-list">
+          <p class="empty-state">No tabs connected</p>
+        </div>
+        <button id="spawnTabBtn" class="btn btn-secondary">Spawn New Tab</button>
+      </section>
+
+      <section class="logs-section">
+        <h2>Activity Log</h2>
+        <div id="activityLog" class="activity-log">
+          <p class="empty-state">No activity yet</p>
+        </div>
+        <button id="clearLogBtn" class="btn btn-secondary">Clear Log</button>
+      </section>
+    </main>
+  </div>
+  <script src="sidepanel.js" type="module"></script>
+</body>
+</html>
